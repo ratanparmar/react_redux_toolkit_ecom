@@ -11,7 +11,7 @@ const dispatch =useDispatch()
 const removeFromCart =(product)=>{
     
     var id = product.id
-    console.log(id)
+    // console.log(id)
     dispatch(remove(id))
 }
     return(

@@ -1,4 +1,5 @@
-import {createSlice,createAsyncThunk} from '@reduxjs/toolkit'
+import {createSlice} from '@reduxjs/toolkit'
+import {getProductFromAPINew} from '../middleware/ProductMiddleware'
 
 const initialState={
     data:[],
@@ -15,12 +16,12 @@ const productSlice=createSlice({
         }
     },
     extraReducers:(builder)=>{
-        builder.addCase(getProductFromAPI.pending,(state,action)=>{
+        builder.addCase(getProductFromAPINew.pending,(state,action)=>{
             state.status='loading'
-        }).addCase(getProductFromAPI.fulfilled,(state,action)=>{
+        }).addCase(getProductFromAPINew.fulfilled,(state,action)=>{
             state.data=action.payload
             state.status='idle'
-        }).addCase(getProductFromAPI.rejected,(state,action)=>{
+        }).addCase(getProductFromAPINew.rejected,(state,action)=>{
             state.status='error'
         })
     }
@@ -29,11 +30,11 @@ const productSlice=createSlice({
 export const {fetchProducts}=productSlice.actions;
 export default productSlice.reducer
 
-export const  getProductFromAPI= createAsyncThunk('products',async()=>{
-    const data = await fetch('https://fakestoreapi.com/products')
-    const result = await data.json();
-    return result;
-})
+// export const  getProductFromAPI= createAsyncThunk('products',async()=>{
+//     const data = await fetch('https://fakestoreapi.com/products')
+//     const result = await data.json();
+//     return result;
+// })
     
 
 
